@@ -20,10 +20,10 @@ export default function Navbar() {
             Home
           </NavLink>
           <NavLink to="/cart" className="mr-4 hover:text-yellow-500">
-            <span className="cartCount absolute right-[11.8rem] bottom-8">
+            <span className="cartCount relative  top-1 left-4">
               {cart.length}
             </span>
-            <img className="h-8" src={cartImage} alt="Cart" />
+            <img className="h-8 relative bottom-3" src={cartImage} alt="Cart" />
           </NavLink>
           <NavLink to="/login" className="mr-4 hover:text-yellow-500">
             Login
