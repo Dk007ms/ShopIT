@@ -4,9 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./components/AppRoutes";
 
 export default function App() {
-  console.log("hello i am app");
   return (
-    <div>
+    <div className=" scroll-smooth">
       <Navbar />
       <AppRoutes />
     </div>

@@ -9,7 +9,7 @@ import MainHeader from "./MainHeader";
 
 export default function AppRoutes() {
   return (
-    <div className="routes w-screen h-screen overflow-x-hidden overflow-y-auto">
+    <div className="routes w-screen  overflow-x-hidden overflow-y-auto">
       <Routes>
         <Route path="/" element={<MainHeader />} />
         <Route index element={<Home />} />
