@@ -17,7 +17,7 @@ export default function ProductCard({ item }) {
   }
 
   return (
-    <div className="product-card border-2 shadow-sm shadow-black w-96 p-3 flex flex-col justify-between rounded-md bg-white mb-4">
+    <div className="product-card border-2 shadow-sm shadow-black lg:w-96 w-5/6 p-3 flex flex-col justify-between rounded-md bg-white mb-4">
       <img
         className="product-image w-full h-56 object-contain mx-auto"
         src={image}
