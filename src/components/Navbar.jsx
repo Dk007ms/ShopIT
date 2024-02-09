@@ -13,16 +13,17 @@ export default function Navbar() {
       <nav className="container mx-auto flex items-center justify-between h-16 px-4 text-white">
         <Link to="/" className="flex items-center">
           <img className="h-10 mr-2" src={logo} alt="Logo" />
-          <span className="font-bold text-xl">ShopIT</span>
+          <span className="font-bold text-xl">ZenithMart</span>
         </Link>
         <div className="flex items-center">
           <NavLink to="/" className="mr-4 hover:text-yellow-500">
             Home
           </NavLink>
           <NavLink to="/cart" className="mr-4 hover:text-yellow-500">
-            <span className="cartCount relative  top-2 left-5">
-              {cart.length}
+            <span className="cartCount relative top-2 left-5">
+              {cart.reduce((count, item) => count + item.quantity, 0)}
             </span>
+
             <img
               className="w-12 object-cover relative bottom-3"
               src={cartImage}

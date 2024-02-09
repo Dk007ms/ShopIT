@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addtoCart, clearCart } from "../redux/Slices/CartSlice";
+import { addtoCart, removeOne } from "../redux/Slices/CartSlice";
+import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 
 export default function ProductCard({ item }) {
   const { image, description, title, price } = item;
 
   const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
 
-  function removeItem() {
-    dispatch(clearCart(item.id));
-  }
+  // Memoize cartItem to avoid unnecessary recalculations
+  const cartItem = useMemo(
+    () => cart.find((cartItem) => cartItem.id === item.id) || {},
+    [cart, item.id]
+  );
+  const quantity = cartItem.quantity || 0;
+
+  const dispatch = useDispatch();
 
   function addItem() {
     dispatch(addtoCart(item));
+  }
+
+  function changeQty(operation) {
+    if (operation === "increase") {
+      dispatch(addtoCart(item));
+    } else if (operation === "decrease") {
+      dispatch(removeOne(item));
+    }
   }
 
   return (
@@ -32,14 +45,23 @@ export default function ProductCard({ item }) {
         </p>
         <div className="product-price text-xl font-bold text-gray-900 flex justify-between items-center">
           <span>${price}</span>
-          <div className="">
-            {cart.some((cartItem) => cartItem.id === item.id) ? (
-              <button
-                onClick={removeItem}
-                className="cart-btn bg-red-600  text-white font-thin py-1 px-4 rounded"
-              >
-                Remove
-              </button>
+          <div className="cartButtons">
+            {quantity >= 1 ? (
+              <div className="counter flex items-center">
+                <button
+                  onClick={() => changeQty("decrease")}
+                  className="decrement text-4xl"
+                >
+                  <CiSquareMinus />
+                </button>
+                <span className="quantity px-4 text-2xl">{quantity}</span>
+                <button
+                  onClick={() => changeQty("increase")}
+                  className="increment text-4xl"
+                >
+                  <CiSquarePlus />
+                </button>
+              </div>
             ) : (
               <button
                 onClick={addItem}
