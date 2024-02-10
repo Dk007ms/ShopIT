@@ -12,14 +12,14 @@ export default function Cart() {
   }
 
   const totalAmount = cart
-    .reduce((acc, item) => acc + item.price, 0)
+    .reduce((acc, item) => acc + item.price * item.quantity, 0)
     .toFixed(2);
 
   return (
     <div className="w-full max-w-screen-xl mx-auto px-4 mt-28">
       {cart.length > 0 ? (
         <div className="flex flex-col lg:flex-row mx-5">
-          <div className="lg:w-3/4 pr-8">
+          <div className="lg:w-3/4">
             <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
             {cart.map((item) => (
               <CartItem key={item.id} item={item} />
