@@ -1,8 +1,12 @@
 // Login.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { setLogin } from "../redux/Slices/LoginSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import "./toastStyles.css";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -10,13 +14,30 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = (values) => {
-    console.log(values); // Handle form submission
+    const payload = {
+      email: values.email,
+      isLogged: true,
+      securityCode: values.password,
+    };
+    dispatch(setLogin(payload));
+    navigate("/");
+    toast.success("Logged in Successfully", {
+      autoClose: 2000,
+      draggable: true,
+      bodyClassName: "toastbody",
+      className: "toastbody",
+      style: {
+        borderRadius: "1rem",
+      },
+    });
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="w-full max-w-xs">
+      <div className="w-5/6 max-w-xs">
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={LoginSchema}

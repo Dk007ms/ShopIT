@@ -1,8 +1,10 @@
 // Signup.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
+import "./toastStyles.css";
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
@@ -13,13 +15,23 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Signup = () => {
+  const navigate = useNavigate();
   const handleSubmit = (values) => {
-    console.log(values); // Handle form submission
+    navigate("/");
+    toast.success("Signed up Successfully", {
+      autoClose: 2000,
+      draggable: true,
+      bodyClassName: "toastbody",
+      className: "toastbody",
+      style: {
+        borderRadius: "1rem",
+      },
+    });
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="w-full max-w-xs">
+      <div className="w-5/6 max-w-xs">
         <Formik
           initialValues={{ name: "", email: "", password: "" }}
           validationSchema={SignupSchema}

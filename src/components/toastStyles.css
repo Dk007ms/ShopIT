@@ -1,0 +1,16 @@
+/* toast-styles.css */
+
+/* Default styles for larger screens */
+.toastbody {
+  border-radius: 1rem;
+  margin: auto;
+  font-size: large;
+  text-align: center;
+
+  /* Media query for smaller screens */
+  @media screen and (max-width: 600px) {
+    width: 80%;
+    border-radius: 1rem;
+    font-size: medium;
+  }
+}

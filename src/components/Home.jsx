@@ -4,7 +4,6 @@ import ProductCard from "./ProductCard";
 
 const API_URL = "https://fakestoreapi.com/products";
 var output = [];
-console.log(output);
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -16,7 +15,6 @@ export default function Home() {
     } catch (e) {
       console.log(e);
     }
-    console.log("hello");
     setLoading(false);
   }
 

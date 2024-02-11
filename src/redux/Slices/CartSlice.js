@@ -26,12 +26,14 @@ const CartSlice = createSlice({
         return state.filter((item) => item.id !== id);
       }
     },
-
     clearCart(state, action) {
       return state.filter((item) => item.id !== action.payload);
+    },
+    logOut(state) {
+      return [];
     },
   },
 });
 
-export const { addtoCart, clearCart, removeOne } = CartSlice.actions;
+export const { addtoCart, clearCart, removeOne, logOut } = CartSlice.actions;
 export default CartSlice.reducer;

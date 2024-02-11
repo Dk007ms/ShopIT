@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import CartSliceReducer from "./Slices/CartSlice";
+import LoginSliceReducer from "./Slices/LoginSlice";
 
 // Define function to load state from localStorage
 const loadStateFromLocalStorage = () => {
@@ -32,6 +33,7 @@ const preloadedState = loadStateFromLocalStorage();
 export const store = configureStore({
   reducer: {
     cart: CartSliceReducer,
+    login: LoginSliceReducer,
   },
   preloadedState: preloadedState,
 });

@@ -20,7 +20,7 @@ export default function Cart() {
       {cart.length > 0 ? (
         <div className="flex flex-col lg:flex-row mx-5">
           <div className="lg:w-3/4">
-            <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
+            <h2 className="text-2xl font-semibold mb-4 ">Your Cart</h2>
             {cart.map((item) => (
               <CartItem key={item.id} item={item} />
             ))}

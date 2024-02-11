@@ -2,11 +2,16 @@ import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addtoCart, removeOne } from "../redux/Slices/CartSlice";
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "./toastStyles.css";
 
 export default function ProductCard({ item }) {
   const { image, description, title, price } = item;
 
   const cart = useSelector((state) => state.cart);
+  const { isLoggedin } = useSelector((state) => state.login);
+  const navigate = useNavigate();
 
   // Memoize cartItem to avoid unnecessary recalculations
   const cartItem = useMemo(
@@ -18,7 +23,29 @@ export default function ProductCard({ item }) {
   const dispatch = useDispatch();
 
   function addItem() {
-    dispatch(addtoCart(item));
+    if (isLoggedin) {
+      dispatch(addtoCart(item));
+      toast.success("Item added Successfully", {
+        autoClose: 2000,
+        draggable: true,
+        bodyClassName: "toastbody",
+        className: "toastbody",
+        style: {
+          borderRadius: "1rem",
+        },
+      });
+    } else {
+      toast.error("Please Login", {
+        autoClose: 2000,
+        draggable: true,
+        bodyClassName: "toastbody",
+        className: "toastbody",
+        style: {
+          borderRadius: "1rem",
+        },
+      });
+      navigate("/login");
+    }
   }
 
   function changeQty(operation) {
